@@ -1,35 +1,348 @@
 <!DOCTYPE html>
-<html >
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>HAPPY BIRTHDAY SEYANSHI</title>
-      <link rel="stylesheet" href="/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HAPPY BIRTHDAY SEYANSHI!</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Open+Sans:wght@400&family=Great+Vibes&family=Shadows+Into+Light&family=Patrick+Hand&display=swap" rel="stylesheet">
+
+    <style>
+        /* General Styles */
+        body {
+            background: radial-gradient(circle, #012b29, #0c1502 50%);
+    color: #b8a850;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    text-align: center;
+        }
+
+        /* Preloader */
+        #preloader {
+            display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, #012b29, #0c1502 50%);
+    z-index: 500;
+    animation: glowingBg 5s infinite alternate;
+        }
+
+        #preloader h1 {
+            position: relative;
+    z-index: 599;
+    font-size: 35px;
+    color: #fc0;
+    font-family: 'Bonheur Royale', cursive;
+        }
+@keyframes glowingBg {
+    0% { background-color: #012b29; }
+    50% { background-color: #0c1502; }
+    100% { background-color: #012b29; }
+}
+
+@keyframes fadeText {
+    0% { opacity: 0; transform: translateY(-10px); }
+    50% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0.8; }
+}
+        /* Main Content */
+        .container {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .show-content {
+            opacity: 1;
+        }
+
+        .handwriting-text {
+            display: inline-block;
+    color: #fff;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 25px;
+        }
+
+        .handwriting-names {
+            color: #fc0fc0;
+    font-family: 'Great Vibes', cursive;
+    font-size: 70px;
+    text-shadow: 0 0 15px #fc0fc0, 0 0 20px #fc0fc0, 0 0 30px #fc0fc0;
+        }
+    /* Heartbeat Animation */
+.heart-beat {
+    animation: 0.5s infinite alternate heartbeat;
+    display: inline-block;
+    font-size: 50px;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(0); }
+    25% { transform: scale(0.25); }
+    50% { transform: scale(0.5); }
+    75% { transform: scale(0.75); }
+    100% { transform: scale(0.9); }
+}
+    /* Header */
+.header {
+    position: relative;
+    z-index: 0;
+    margin-top: 40px;
+}
+.header img {
+    max-width: 400px;
+    margin-top: 50px; /* Adjust this value to move it further down */
+}
+    /* Decorations */
+.garlands {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    z-index: 0;
+}
+    .garlands img {
+    max-width: 100%;
+}
+    .side-image-left, .side-image-right {
+    position: absolute;
+    top: 30%;
+    z-index: auto;
+}
+    .side-image-left { left: 0; }
+.side-image-right { right: 0; }
+    .side-image-left img, .side-image-right img {
+    max-width: 150px;
+    opacity: 0.2;
+}
+
+        /* Floating Buttons */
+        .floating-button, .floating-wishes-button {
+            background: #0099ffe6;
+    color: #fff;
+    font-size: 25px;
+    position: fixed;
+    bottom: 10px;
+    padding: 5px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 6px #0099ff80;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+    z-index: 1000;
+        }
+
+        .floating-button { right: 10px; }
+.floating-button:hover { background-color: #007acc; }
+        .floating-wishes-button { left: 10px; }
+.floating-wishes-button:hover {
+    background: #00aeff;
+    box-shadow: 0 6px 14px #00aeffb3;
+    transform: scale(1.1);
+}
+        /* Popup */
+        .popup {
+            background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px #0003;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 85%;
+    max-width: 300px;
+    padding: 20px;
+    transform: translate(-50%, -50%);
+    z-index: 2000;
+        }
+    .popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.close {
+    cursor: pointer;
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+
+/* Input Fields */
+input, textarea {
+    width: 85%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.popup button {
+    background: #09f;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 75%;
+    padding: 10px;
+    font-size: 16px;
+    margin: 5px;
+}
+
+.popup button:hover {
+    background: #007acc;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .side-image-left img, .side-image-right img {
+        max-width: 150px;
+    }
+
+    .header h1 {
+        font-size: 50px;
+    }
+    .lordeffect {
+    font-family: 'Shadows Into Light', cursive;
+        font-size: 40px;
+    color: #0fc;
+    text-shadow: 0 0 10px #0fc, 0 0 20px #0fc, 0 0 40px #0fc, 0 0 80px #0fc;
+        margin-top: -10px; 
+    
+}
+    </style>
 </head>
-<body background="/seyanshi/bg2.jpg">
-  <h1>HAPPY BIRTHDAY SEYANSHI</h1>
-   <div class="container"><center>
-         <video controls width=900px>
-        <source src="/seyanshi/video3.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video></center>
-     </div>
-  <div class="gallery">
-  <div class="img-w"><img src="/seyanshi/01.jpg" alt="" /></div>
-  <div class="img-w"><img src="/seyanshi/02.jpg" alt="" /></div>
-  <div class="img-w"><img src="/seyanshi/03.jpg" alt="" /></div>
-  <div class="img-w"><img src="/seyanshi/04.jpg" alt="" /></div>
-  <div class="img-w"><img src="/seyanshi/05.jpg" alt="" /></div>
-  <div class="img-w"><img src="/seyanshi/06.jpg" alt="" /></div>
-  <div class="img-w"><img src="/seyanshi/07.jpg" alt="" /></div>
-  <div class="img-w"><img src="/seyanshi/08.jpg" alt="" /></div>
-  <div class="img-w"><img src="/seyanshi/09.jpg" alt="" /></div>
-  <div class="img-w"><img src="/seyanshi/10.jpg" alt="" /></div>
-  <div class="img-w"><img src="/seyanshi/11.jpg" alt="" /></div>
-  <div class="img-w"><img src="/seyanshi/12.jpg" alt="" /></div>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
-  <script src="/index.js"></script>
+
+<body>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <h1>Happy Birthday Seyanshi</h1>
+    </div>
+
+    <!-- Decorations -->
+    <div class="garlands"><img src="flowers.png" alt="Flower Garland"></div>
+    <div class="side-image-left"><img src="left-image.png" alt="Left Decoration"></div>
+    <div class="side-image-right"><img src="right-image.png" alt="Right Decoration"></div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="header">
+            <img src="balaji.png" alt="Shree Balaji" loading="lazy">
+            
+            <span class="handwriting-text">
+                <b>
+                    <!-- Video -->
+<video id="myVideo" width="100%" autoplay muted loop>
+    <source src="video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<!-- Floating Mute/Unmute Button -->
+<button id="muteButton" class="floating-button" onclick="toggleMute()">🔊</button>
+ </span>
+            <br><br>
+            <span class="heart-beat">❤️</span>
+            <span class="handwriting-names">Seyanshi</span>
+            <span class="heart-beat">❤️</span>
+            <br>
+            <span class="handwriting-text">
+                "On your birthday, may you receive all that you ask for, find all that you seek, and have every wish fulfilled today and always. Wishing you a very Happy Birthday!"
+
+
+            </span>
+        </div>
+
+
+       
+        <button class="floating-wishes-button" onclick="openWishesPopup()">💌</button>
+
+        <!-- Wishes Popup -->
+        <div id="wishesPopup" class="popup">
+            <div class="popup-content">
+                <span class="close" onclick="closeWishesPopup()">&times;</span>
+                <h2>Send Your Wishes</h2>
+                <form id="wishesForm" action="https://docs.google.com/forms/d/e/1FAIpQLSdR_NVl2_yV9BtwKcWFRwbfID4SNmyauwCklqOSRSpHLScW2Q/formResponse" method="POST" target="hidden_iframe">
+                    <input name="entry.476830613" id="wisherName" placeholder="Your Name" required>
+                    <textarea name="entry.80548757" id="wisherMessage" placeholder="Your Message" required></textarea>
+                    <button type="submit">Send</button>
+                </form>
+                <iframe name="hidden_iframe" style="display:none"></iframe>
+                <p id="thanksMessage" style="display:none;color:green">Thank You for Your Wishes!</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const preloader = document.getElementById("preloader");
+            const content = document.querySelector(".container");
+
+            setTimeout(() => {
+                preloader.style.opacity = "0";
+                setTimeout(() => { preloader.style.display = "none"; }, 1000);
+                content.classList.add("show-content");
+            }, 1500);
+        });
+
+        function toggleMute() {
+    var video = document.getElementById("myVideo");
+    var button = document.getElementById("muteButton");
+
+    if (video.muted) {
+        video.muted = false;
+        button.innerHTML = "🔇"; // Change button icon/text
+    } else {
+        video.muted = true;
+        button.innerHTML = "🔊"; // Change button icon/text
+    }
+}
+        // Open & Close Wishes Popup
+        function openWishesPopup() {
+            document.getElementById("wishesPopup").style.display = "block";
+        }
+
+        function closeWishesPopup() {
+            document.getElementById("wishesPopup").style.display = "none";
+        }
+
+        // Show Thank You Message After Form Submission
+        document.getElementById("wishesForm").onsubmit = function () {
+            document.getElementById("thanksMessage").style.display = "block";
+            setTimeout(closeWishesPopup, 1200);
+            return true; // Allow Google Form to submit
+        };
+
+        // Fireworks Effect
+        window.onload = function () {
+            const canvas = document.createElement("canvas");
+            document.body.appendChild(canvas);
+            canvas.style.position = "fixed";
+            canvas.style.top = "0";
+            canvas.style.left = "0";
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            canvas.style.zIndex = "-1";
+            canvas.style.opacity = "0.5";
+
+            const fireworks = new Fireworks.default(canvas, { particles: 200 });
+            fireworks.start();
+        };
+    
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js/dist/index.umd.js"></script>
+
 </body>
-  <center>
-  <footer>Created with ❤️ by SP</footer>
-  </center>
+
 </html>
