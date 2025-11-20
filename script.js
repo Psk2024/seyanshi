@@ -373,7 +373,7 @@ document.getElementById("openWishes")?.classList.add("visible");
       document.body.appendChild(audio);
     }
     // set default src if not present (adjust path if needed)
-    if (!audio.src || audio.src.trim() === '') audio.src = "music.mp3";
+    if (!audio.src || audio.src.trim() === '') audio.src = "happy.mp3";
 
     function setIcon(isPlaying) {
       btn.textContent = isPlaying ? '🔊' : '🔇';
