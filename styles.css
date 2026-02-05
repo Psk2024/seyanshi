@@ -1,0 +1,647 @@
+:root{
+  --accent: #c84b9a;
+  --accent-2: #ffd86b;
+  --gold: #f5c86f;
+  --cream: #fff9f0;
+  --card-bg: rgba(255,255,255,0.22);
+  --text-dark: #f7efe8;
+}
+/* ================= POPUP OVERLAY ================= */
+.popup {
+  position: fixed;
+  inset: 0;
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(5, 15, 40, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  z-index: 6000;
+  animation: popupFade 0.35s ease;
+}
+
+@keyframes popupFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.paused * {
+  animation-play-state: paused !important;
+}
+/* ALBUM CONTAINER */
+.album {
+  margin: 24px auto;
+  width: min(900px, 100%);
+}
+
+/* HERO AREA */
+.album-hero {
+  position: relative;
+  height: 420px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 30px 80px rgba(0,0,0,.45);
+}
+
+/* MAIN IMAGES */
+.album-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1);
+  transition: opacity 1.2s ease, transform 6s ease;
+}
+
+.album-photo.active {
+  opacity: 1;
+  transform: scale(1.08); /* cinematic zoom */
+}
+
+/* SOFT GRADIENT */
+.album-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.35),
+    transparent 45%
+  );
+}
+
+/* MEMORY STRIP */
+.album-strip {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+/* THUMBNAILS */
+.album-strip .thumb {
+  height: 64px;
+  width: 96px;
+  object-fit: cover;
+  border-radius: 10px;
+  opacity: .5;
+  cursor: pointer;
+  transition: transform .4s ease, opacity .4s ease;
+}
+
+.album-strip .thumb.active {
+  opacity: 1;
+  transform: scale(1.05);
+  outline: 2px solid rgba(255,216,107,.8);
+}
+
+
+/* ================= POPUP CARD ================= */
+.popup-content {
+  width: min(420px, 92%);
+  padding: 22px 22px 18px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.18),
+    rgba(255,255,255,0.08)
+  );
+
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.25);
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.45),
+    inset 0 0 25px rgba(255,255,255,0.25);
+
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+
+  color: #fff;
+  transform: translateY(16px) scale(0.96);
+  animation: popupIn 0.45s cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+@keyframes popupIn {
+  to {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ================= POPUP HEADER ================= */
+.popup-content h2 {
+  margin: 6px 0 14px;
+  text-align: center;
+
+  font-family: 'Cinzel', serif;
+  letter-spacing: 1px;
+  font-size: 18px;
+
+  color: #ffe6a2;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.45);
+}
+
+/* ================= CLOSE BUTTON ================= */
+.popup .close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: rgba(255,255,255,0.15);
+  color: #000000;
+  font-size: 18px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 14px rgba(0,0,0,0.35),
+    inset 0 0 8px rgba(255,255,255,0.25);
+
+  transition: transform .2s ease, background .2s ease;
+}
+
+.popup .close-btn:hover {
+  transform: scale(1.1);
+  background: rgba(255,255,255,0.25);
+}
+
+/* ================= INPUTS ================= */
+.popup-content input,
+.popup-content textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0;
+
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.35);
+
+  background: rgba(255,255,255,0.15);
+  color: #000000;
+
+  font-size: 15px;
+  outline: none;
+
+  backdrop-filter: blur(6px);
+}
+
+.popup-content input::placeholder,
+.popup-content textarea::placeholder {
+  color: rgba(255,255,255,0.7);
+}
+
+.popup-content textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+/* ================= BUTTON ROW ================= */
+.form-row {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+/* SEND BUTTON */
+.send-btn {
+  background: linear-gradient(135deg, #1e3f8f, #4c79d2);
+  color: #fff;
+
+  border: none;
+  border-radius: 12px;
+  padding: 10px 18px;
+
+  font-weight: 600;
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 22px rgba(30, 90, 180, 0.45),
+    inset 0 0 12px rgba(255,255,255,0.25);
+
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.send-btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 30px rgba(30, 90, 180, 0.55),
+    inset 0 0 14px rgba(255,255,255,0.35);
+}
+
+/* CLOSE BUTTON */
+.form-row .close-btn {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+}
+
+/* ================= THANK YOU MESSAGE ================= */
+#thanksMessage {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 15px;
+  color: #a7ffbf;
+  animation: thankPulse 1.4s ease infinite;
+}
+
+@keyframes thankPulse {
+  50% { opacity: 0.7; }
+}
+/* COMMON BASE – SAME COLOR */
+.floating-button,
+.floating-wish-btn {
+  background: linear-gradient(135deg, #1e3f8f, #4c79d2);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.25);
+
+  box-shadow:
+    0 10px 30px rgba(30, 90, 180, 0.45),
+    inset 0 0 16px rgba(255,255,255,0.25);
+}
+
+/* AUDIO – ROUND */
+#audioToggle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  font-size: 22px;
+}
+
+/* WISHES – PILL */
+#openWishes {
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-size: 18px;
+  font-weight: 600;
+}
+/* Reset */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{
+  height:100%;
+  font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
+  background:linear-gradient(180deg,#081a4a,#0e3a7a); /* fallback while back.png loads */
+  color:var(--text-dark);
+}
+
+/* Background (uses back.png in same folder) */
+.bg1{
+  position:fixed;
+  inset:0;
+  z-index:-40;
+  background: url("back.png") center/cover no-repeat;
+  background-size: cover;
+  filter: saturate(1.1) brightness(.95);
+}
+.bg-overlay{
+  position:fixed;
+  inset:0;
+  z-index:-35;
+  background: rgba(10,25,60,0.32);
+  backdrop-filter: blur(2px);
+  pointer-events:none;
+}
+
+/* ---------- Visual containers (single-instance, positive z-index) ----------
+   Balloons, hearts and canvases should be above background but below the .container (.container z-index = 10)
+------------------------------------------------------------------------- */
+#bokehCanvas, #sparkleCanvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1500; /* above bg, below hearts/balloons */
+}
+
+#balloons {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 2000;
+  overflow: visible;
+}
+/* Random falling hearts */
+.f-heart {
+  position: absolute;
+  top: -40px;
+  opacity: 0;
+  pointer-events: none;
+  animation: heartFall linear forwards;
+}
+
+@keyframes heartFall {
+  0%   { transform: translate(0, 0) scale(0.6); opacity: 0; }
+  10%  { opacity: 0.9; }
+  50%  { transform: translate(20px, 120px) scale(1); }
+  100% { transform: translate(-20px, 260px) scale(1.2); opacity: 0; }
+}
+#floating-hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2000;
+  overflow: visible;
+}
+/* Glass + glow */
+.floating-button, .floating-wish-btn {
+  position: fixed;
+  bottom: 22px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+  backdrop-filter: blur(6px) saturate(1.1);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(13,33,85,0.45), 0 2px 8px rgba(255,200,120,0.06) inset;
+  opacity: 0;
+  transform: translateY(12px) scale(.98);
+  transition: opacity .55s ease, transform .55s cubic-bezier(.2,.9,.2,1), box-shadow .25s;
+  z-index:4000;
+  pointer-events:none;
+}
+
+/* color accents */
+.floating-button { right:18px; background-image: linear-gradient(180deg, rgba(26,56,111,0.9), rgba(47,100,190,0.95)); color: #fff; }
+.floating-wish-btn { left:18px; background-image: linear-gradient(180deg, rgba(255,210,110,0.95), rgba(255,182,90,0.95)); color: #101010; }
+
+/* subtle pulsing glow on hover / focus */
+.floating-button:hover, .floating-wish-btn:hover {
+  box-shadow: 0 20px 60px rgba(60,120,220,0.18), 0 8px 30px rgba(0,0,0,0.28);
+  transform: translateY(0) scale(1.02);
+  cursor: pointer;
+}
+
+/* visible state */
+.floating-button.visible, .floating-wish-btn.visible {
+  opacity:1; transform: translateY(0) scale(1); pointer-events:auto;
+}
+
+/* mobile */
+@media (max-width:600px) {
+  .floating-button, .floating-wish-btn { padding:10px; border-radius:12px; bottom:12px; font-size:16px; }
+}
+/* PRELOADER */
+#preloader{
+  position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+  z-index:3000;background:rgba(0,0,0,0.18);
+}
+.preloader-inner{
+  padding:20px;text-align:center;
+  background: rgba(255,255,255,0.08);
+  border-radius:16px;
+  max-width:420px;
+  border:1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px) saturate(1.2);
+}
+.spinner{
+  width:44px;height:44px;border-radius:50%;
+  border:6px solid rgba(255,255,255,0.06);
+  border-top-color:var(--gold);
+  margin:0 auto 12px;animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+#preloader-message{font-size:17px;color:var(--gold)}
+#preloader-countdown{font-weight:800;font-size:22px;color:var(--accent-2);margin-top:6px;letter-spacing:2px;animation:pulse 2s infinite}
+@keyframes pulse{50%{transform:scale(1.03)}}
+#preloader-subtext{font-size:13px;color:rgba(255,235,200,0.9);margin-top:6px}
+#countdown-ring{position:absolute;top:14px;right:14px;}
+
+/* MAIN container and card (glass) */
+.container{display:flex;justify-content:center;padding:28px;z-index:10;position:relative}
+.header{
+  width:min(860px,96%);
+  padding:32px;
+  border-radius:22px;
+
+  /* GLASS effect */
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(22px) saturate(1.4);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+
+  border:1px solid rgba(255,255,255,0.35);
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.25),
+    inset 0 0 35px rgba(255,255,255,0.12);
+
+  text-align:center;
+}
+
+/* Titles + text tuned to blue/gold palette */
+.intro-line{
+  font-family:'Cinzel',serif;
+  letter-spacing:2px;
+  font-size:23px;
+  color:#ffe6a2;
+/*  color:var(--gold); */
+  margin-bottom:6px;
+}
+.lordeffect{
+  font-family:'Cinzel',serif;
+  font-size:30px;
+  color:#ffe6a2;
+  text-shadow:0 2px 6px rgba(0,0,0,0.25);
+  margin:6px 0;
+}
+.names-row{margin:12px 0;display:flex;align-items:center;justify-content:center}
+.crown{font-size:22px;margin-right:8px;filter:drop-shadow(0 6px 12px rgba(0,0,0,0.45))}
+.handwriting-names{
+  font-family:'Great Vibes',cursive;
+  font-size:90px;
+  color:var(--gold);
+   /* soft creamy gold */
+  text-shadow:0 3px 12px rgba(0,0,0,0.45);
+}
+.date-line,.message-line,.from-line{
+  color:var(--cream);
+  font-weight:400;
+  text-shadow:0 1px 4px rgba(0,0,0,0.35);
+  margin:6px 0;
+}
+.message-line {
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.6;
+}
+/* Name entrance animation */
+@keyframes namePop{
+  0%{opacity:0;transform:translateY(20px) scale(.85)}
+  60%{opacity:1;transform:translateY(-6px) scale(1.1)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+.handwriting-names.name-entrance{animation:namePop 1.6s ease}
+
+/* Album - glass matching */
+.photo-album{
+  position:relative;
+  height:360px;
+  border-radius:18px;
+  overflow:hidden;
+  margin:14px auto 8px;
+
+  /* REMOVE transparency & blur */
+  background: #000;          /* or any solid color */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+}
+.album-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.1s ease}
+.album-photo.active{opacity:1}
+.album-caption{
+  position:absolute;left:12px;bottom:12px;padding:8px 16px;
+  background:rgba(0,0,0,0.55);
+  color:#ffe7aa;
+  backdrop-filter:blur(6px);
+  border-radius:10px;
+  text-shadow:0 2px 4px rgba(0,0,0,0.6);
+}
+
+/* Footer dancers — sized and stylized */
+.footer-dancers{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:10px;margin-bottom:10px}
+.footer-dancers .dancers img{
+  height:110px;
+  width:auto;
+  object-fit:contain;
+  display:block;
+  margin:0 auto;
+  opacity:0.95;
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,0.45));
+}
+
+/* Floating action buttons colored for theme */
+/* Royal Glass Buttons (Best Theme Match) */
+.floating-button,
+.floating-wish-btn {
+  position: fixed;
+  bottom: 20px;
+  padding: 10px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.20);
+  backdrop-filter: blur(10px) saturate(1.4);
+  -webkit-backdrop-filter: blur(10px) saturate(1.4);
+  font-size: 20px;
+  line-height: 1;
+  z-index: 5000;
+  opacity: 0;
+  transform: translateY(14px) scale(.94);
+  pointer-events: none;
+  transition: opacity .5s ease, transform .5s cubic-bezier(.15,1,.30,1);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.32), inset 0 0 18px rgba(255,255,255,0.25);
+}
+
+/* Audio Button (Right) */
+.floating-button {
+  right: 18px;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#1e3f8f,#4c79d2);
+  color: #fff;
+}
+
+/* Wishes Button (Left) */
+.floating-wish-btn {
+  left: 18px;
+  background: linear-gradient(135deg,#ffd86b,#ffb157);
+  color: #222;
+  font-weight: 600;
+}
+
+/* Visible class (added by JS after reveal) */
+.floating-button.visible,
+.floating-wish-btn.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Hover effect */
+.floating-button:hover,
+.floating-wish-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.38);
+}
+/* Popup overlay and content */
+.popup{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,0.28);backdrop-filter:blur(4px);
+  padding:20px;align-items:center;justify-content:center;z-index:5000;
+}
+.popup .popup-content{
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,245,0.9));
+  padding:18px;border-radius:14px;max-width:420px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,0.18);
+}
+.popup h2{margin-bottom:8px;color:#334b7a}
+.reactions{display:flex;gap:8px;margin-bottom:8px}
+.reaction{background:linear-gradient(90deg,var(--accent-2),var(--accent));border:none;padding:8px 10px;border-radius:10px;color:#fff;font-size:18px;cursor:pointer}
+.popup input,.popup textarea{width:100%;padding:10px;margin:8px 0;border:1px solid #efe6e9;border-radius:10px}
+.form-row{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+.send-btn{background:linear-gradient(90deg,#4a7bd4,#1d3f93);border:none;color:#fff;padding:10px 14px;border-radius:10px}
+.close-btn{background:#eee;border:none;padding:10px 12px;border-radius:10px}
+
+/* Helpers */
+.hidden{display:none !important}
+.show-content{opacity:1;visibility:visible;transform:none}
+
+/* Balloons (floating from bottom → top) */
+/* balloon shape */
+.balloon {
+  position: absolute;
+  bottom: -30px; /* start slightly off-screen */
+  border-radius: 52% 48% 48% 52% / 58% 56% 44% 42%;
+  opacity: 0.95;
+  transform-origin: center bottom;
+  will-change: transform, left, top, opacity;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.25));
+  pointer-events: none;
+}
+.balloon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -10px;
+  width: 2px;
+  height: 36px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.04));
+  border-radius: 2px;
+  opacity: 0.7;
+}
+@keyframes riseUp {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  6% { opacity: 1; }
+  60% { transform: translateY(-60vh) rotate(-6deg); }
+  100% { transform: translateY(-120vh) rotate(10deg); opacity: 0.98; }
+}
+@keyframes sway {
+  0% { transform: translateX(0) }
+  25% { transform: translateX(18px) }
+  50% { transform: translateX(-12px) }
+  75% { transform: translateX(10px) }
+  100% { transform: translateX(0) }
+}
+
+
+
+/* small responsive tweaks */
+@media (max-width:600px){
+  .photo-album{height:360px}
+  .handwriting-names{font-size:44px}
+  .footer-dancers .dancers img{height:80px}
+  .preloader-inner{padding:14px}
+  .handwriting-names{font-size:44px}
+}
